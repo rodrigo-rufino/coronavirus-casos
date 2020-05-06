@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { parseFile } from '../../data/csvParser';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
@@ -29,9 +28,6 @@ const data = [
 ];
 
 export default class Example extends PureComponent {
-  componentDidMount() {
-    parseFile('Pouso Alegre');
-  }
 
   render() {
     return (
