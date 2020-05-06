@@ -21,9 +21,9 @@ export default class Example extends PureComponent {
           <YAxis/>
           <Tooltip />
           <Legend />
-          <Line name="Total de Casos" type="monotone" dataKey="totalCasos" stroke="#8884d8" activeDot={{ r: 5 }} dot={false}/>
-          <Line name="Total de Óbitos" type="monotone" dataKey="totalObitos" stroke="#82ca9d" dot={false}/>
-          <Line name="Estimativa" type="monotone" dataKey="estimativa" stroke="#b3d9ff" strokeDasharray="5 5" strokeWidth={1} dot={false}/>
+          <Line name="Total de Casos" type="monotone" dataKey="totalCasos" stroke="#8884d8" strokeWidth={2} activeDot={{ r: 5 }} dot={false}/>
+          <Line name="Total de Óbitos" type="monotone" dataKey="totalObitos" stroke="#82ca9d" strokeWidth={2} dot={false}/>
+          <Line name="Estimativa" type="monotone" dataKey="estimativa" stroke="#a8a5e6" strokeDasharray="5 5" strokeWidth={1} dot={false}/>
         </LineChart>
       </ResponsiveContainer>
     );
