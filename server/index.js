@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const { parseFile } = require('./data/csvParser');
 
 const app = express();
 
@@ -10,6 +11,10 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('/api/hello', (req, res) => {
   // Return them as json
   res.json({message: 'Hello World!'});
+});
+
+app.get('/api/data', async (req, res) => {
+  res.json(await parseFile());
 });
 
 // The "catchall" handler: for any request that doesn't
