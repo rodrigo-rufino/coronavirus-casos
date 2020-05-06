@@ -32,9 +32,6 @@ export default function SimpleCard() {
       className={classes.root}
       variant="outlined">
         <CardContent>
-          <Typography variant="h5" component="h2">
-           Pouso Alegre
-          </Typography>
           <SimpleLineChart
             data={data}
             style={{
