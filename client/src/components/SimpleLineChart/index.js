@@ -8,13 +8,12 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-      <ResponsiveContainer width="95%" height={400}>
+      <ResponsiveContainer width="95%" height={300}>
         <LineChart
           data={this.props.data}
           margin={{
-            top: 20, right: 20, left: 20, bottom: 20,
+            top: 10, right: 10, left: 10, bottom: 10,
           }}
-          style={{height: 1000}}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="data" />

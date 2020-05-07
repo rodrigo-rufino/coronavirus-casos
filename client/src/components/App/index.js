@@ -3,6 +3,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import * as Colors from '@material-ui/core/colors';
 
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 import AppBar from '../AppBar';
 import SimpleCard from '../CardWrapper';
@@ -27,13 +28,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppBar />
-      <div className="App">
-        <Grid container spacing={3}>
+      <Container maxWidth="md" className="App">
+        <Grid container spacing={5}>
           <Grid item xs={12}>
             <SimpleCard />
           </Grid>
         </Grid>
-      </div>
+      </Container>
     </ThemeProvider>
   );
 }

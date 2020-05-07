@@ -32,8 +32,6 @@ async function parseFile(city='Pouso Alegre') {
   });
 
   const lastDate = moment(extractedData[extractedData.length - 1].data.split('/').join('-'), 'DD/MM/YYYY');
-  
-  console.log('lastDate', lastDate);
 
   for (i = 0; i < 10; i++) {
     extractedData.push({
@@ -41,8 +39,6 @@ async function parseFile(city='Pouso Alegre') {
       estimativa: a * Math.exp((extractedData.length + i) * b),
     })
   }
-
-  console.log(a, b, doublingTime);
 
   return extractedData;
 }

@@ -6,7 +6,7 @@ import SimpleLineChart from '../SimpleLineChart';
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 100,
   }
 });
 
@@ -32,10 +32,7 @@ export default function SimpleCard() {
       variant="outlined">
         <CardContent>
           <SimpleLineChart
-            data={data}
-            style={{
-                position: 'absolute', left: '60%', top: '40%'
-            }} />
+            data={data}/>
         </CardContent>
       </Card>
     </React.Fragment>
