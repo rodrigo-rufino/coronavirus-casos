@@ -2,6 +2,8 @@ import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import * as Colors from '@material-ui/core/colors';
 
+import Grid from '@material-ui/core/Grid';
+
 import AppBar from '../AppBar';
 import SimpleCard from '../CardWrapper';
 
@@ -26,7 +28,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <AppBar />
       <div className="App">
-        <SimpleCard />
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <SimpleCard />
+          </Grid>
+        </Grid>
       </div>
     </ThemeProvider>
   );
