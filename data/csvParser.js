@@ -28,7 +28,7 @@ async function parseFile(city='Pouso Alegre') {
   const [a, b, doublingTime] = regression.exponential(values);
 
   extractedData.forEach((e, i) => {
-    e.estimativa = a * Math.exp((i) * b);
+    e.estimativa = parseFloat((a * Math.exp((i) * b)).toFixed(2));
   });
 
   const lastDate = moment(extractedData[extractedData.length - 1].data.split('/').join('-'), 'DD/MM/YYYY');
