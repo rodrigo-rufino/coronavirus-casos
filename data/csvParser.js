@@ -36,7 +36,7 @@ async function parseFile(city='Pouso Alegre') {
   for (i = 0; i < 10; i++) {
     extractedData.push({
       data: lastDate.add(1, 'd').format('DD/MM/YYYY'),
-      estimativa: a * Math.exp((extractedData.length + i) * b),
+      estimativa: parseFloat((a * Math.exp((extractedData.length + i) * b)).toFixed(2)),
     })
   }
 
