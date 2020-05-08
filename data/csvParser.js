@@ -6,8 +6,14 @@ const moment = require('moment');
 async function parseFile(city='Pouso Alegre') {
   const fileName = `${__dirname}/${city.toLowerCase().trim().replace(/\s/g, '')}.csv`;
 
-  const extractedData = await neatCsv(fs.readFileSync(fileName));
-  
+  let extractedData = [];
+
+  try {
+    extractedData = await neatCsv(fs.readFileSync(fileName));
+  } catch (error) {
+    throw(error);
+  }
+
   let totalCasos = 0;
   let totalObitos = 0;
   let values = [];
@@ -31,16 +37,10 @@ async function parseFile(city='Pouso Alegre') {
     e.estimativa = parseFloat((a * Math.exp((i) * b)).toFixed(2));
   });
 
-  const lastDate = moment(extractedData[extractedData.length - 1].data.split('/').join('-'), 'DD/MM/YYYY');
-
-  for (i = 0; i < 10; i++) {
-    extractedData.push({
-      data: lastDate.add(1, 'd').format('DD/MM/YYYY'),
-      estimativa: parseFloat((a * Math.exp((extractedData.length + i) * b)).toFixed(2)),
-    })
-  }
-
-  return extractedData;
+  return {
+    values: extractedData,
+    function: { a, b, doublingTime }
+  };
 }
 
 module.exports = {

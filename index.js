@@ -1,8 +1,11 @@
 const express = require('express');
 const path = require('path');
 const { parseFile } = require('./data/csvParser');
+const bodyParser = require('body-parser');
 
 const app = express();
+
+app.use(bodyParser.json());
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -13,8 +16,14 @@ app.get('/api/hello', (req, res) => {
   res.json({message: 'Hello World!'});
 });
 
-app.get('/api/data', async (req, res) => {
-  res.json(await parseFile());
+app.post('/api/data', async (req, res) => {
+  console.log(req.body.city);
+  try {
+    const cityData = await parseFile(req.body.city);
+    res.json(cityData);
+  } catch (error) {
+    res.status(404).send('City not found!');
+  }
 });
 
 // The "catchall" handler: for any request that doesn't

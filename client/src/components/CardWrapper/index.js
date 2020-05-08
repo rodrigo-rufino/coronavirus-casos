@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import SimpleLineChart from '../SimpleLineChart';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
@@ -10,20 +10,8 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleCard() {
+export default function SimpleCard(props) {
   const classes = useStyles();
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch('/api/data')
-    .then(res => res.json())
-    .then((data) => {
-      console.log('oi');
-      setData(data);
-    })
-    .catch(() => console.log('Erro'));
-  }, []);
 
   return (
     <React.Fragment>
@@ -31,9 +19,12 @@ export default function SimpleCard() {
       className={classes.root}
       variant="outlined">
         <CardContent>
-          <SimpleLineChart
-            data={data}/>
+          <Typography variant="h5" component="h2">
+            {props.title}
+          </Typography>
+          {props.children}
         </CardContent>
+
       </Card>
     </React.Fragment>
   );
