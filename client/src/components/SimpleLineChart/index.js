@@ -1,59 +1,11 @@
-import React, {  useState, useEffect } from 'react';
+import React from 'react';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import moment from 'moment';
 
 import InputSlider from '../InputSlider';
 
-export default function SimpleLineChart(props) {
-
-  const [data, setData] = useState({});
-  const [estimative, setEstimative] = useState([]);
-  const [futureDays, setFutureDays] = useState(0);
-  
-  useEffect(() => {
-    if ( !data.values ) fetchData();
-    estimateDays(futureDays);
-  }, [data]);
-
-  async function fetchData() {
-    const apiCall = await fetch('/api/data', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ city: props.city })
-    });
-    const apiData = await apiCall.json();
-    setData(apiData);
-  }
-
-  function estimateDays(days) {
-    if ( !days || !data || !data.values || !data.function ) return;
-    
-    let values  = [];
-
-    const { a, b } = data.function;
-
-    const totalDays = data.values.length;
-
-    const lastDate = moment(data.values[totalDays - 1].data.split('/').join('-'), 'DD/MM/YYYY');
-
-    for (let i = 0; i < days; i++) {
-      values.push({
-        data: lastDate.add(1, 'd').format('DD/MM/YYYY'),
-        estimativa: parseFloat((a * Math.exp((totalDays + i) * b)).toFixed(2)),
-      })
-    }
-    setEstimative(values);
-  }
-
-  function futureDaysHandler(futureDays) {
-    setFutureDays(futureDays);
-    estimateDays(futureDays);
-  }
+export default function SimpleLineChart({ data, estimative, futureDaysHandler, futureDays }) {
 
   return (
     <React.Fragment>

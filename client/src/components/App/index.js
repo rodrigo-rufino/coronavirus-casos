@@ -6,8 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
 import AppBar from '../AppBar';
-import SimpleCard from '../CardWrapper';
-import SimpleLineChart from '../SimpleLineChart';
+import ChartCard from '../ChartCard';
 
 import './App.css';
 
@@ -31,10 +30,20 @@ function App() {
       <AppBar />
       <Container maxWidth="md" className="App">
         <Grid container spacing={5}>
+          {/* <Grid item xs={4}>
+            <ChartCard title={'Casos em Pouso Alegre'}>
+            </ChartCard>
+          </Grid>
+          <Grid item xs={4}>
+            <ChartCard title={'Casos em Pouso Alegre'}>
+            </ChartCard>
+          </Grid>
+          <Grid item xs={4}>
+            <ChartCard title={'Casos em Pouso Alegre'}>
+            </ChartCard>
+          </Grid> */}
           <Grid item xs={12}>
-            <SimpleCard title={'Casos em Pouso Alegre'}>
-              <SimpleLineChart city={'Pouso Alegre'}/>
-            </SimpleCard>
+            <ChartCard city={'Pouso Alegre'}/>
           </Grid>
         </Grid>
       </Container>
