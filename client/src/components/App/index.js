@@ -18,6 +18,12 @@ const theme = createMuiTheme({
   //   },
   //   secondary: Colors.blue,
   // },
+  typography: {
+    fontFamily: [
+      'Jost', 
+      'sans-serif'
+    ].join(','),
+  },
   status: {
     danger: Colors.orange,
   },
