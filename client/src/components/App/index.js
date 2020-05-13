@@ -1,5 +1,5 @@
 import React from 'react';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
 import * as Colors from '@material-ui/core/colors';
 
 import Grid from '@material-ui/core/Grid';
@@ -11,7 +11,7 @@ import ChartCard from '../ChartCard';
 import './App.css';
 
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   // palette: {
   //   primary: {
   //     main: '#ffffff',
@@ -28,6 +28,7 @@ const theme = createMuiTheme({
     danger: Colors.orange,
   },
 });
+theme = responsiveFontSizes(theme);
 
 function App() {
 

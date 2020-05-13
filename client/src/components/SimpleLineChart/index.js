@@ -17,8 +17,8 @@ export default function SimpleLineChart({ data, estimative, futureDaysHandler, f
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="data" />
-          <YAxis/>
+          <XAxis dataKey="data" tick={{fontSize: 12}}/>
+          <YAxis tick={{fontSize: 12}}/>
           <Tooltip />
           <Legend />
           <Line name="Total de Casos" type="monotone" dataKey="totalCasos" stroke="#8884d8" strokeWidth={2} activeDot={{ r: 5 }} dot={false}/>
