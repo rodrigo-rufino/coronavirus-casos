@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { parseFile } = require('./data/csvParser');
+const { parseFile, writeToFile } = require('./data/csvParser');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -24,6 +24,20 @@ app.post('/api/data', async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404).send('City not found!');
+  }
+});
+
+app.post('/api/insertData', (req, res) => {
+  console.log(req.body.data);
+  if (!req.body.data || !req.body.city) {
+    res.status(400).send({ error: 'Missing Parameters' });
+  }
+
+  try {
+    writeToFile(req.body.city, req.body.data);
+    res.status(200).send(req.body.data);
+  } catch (error) {
+    res.status(404).send({ message: 'Not found!', error });
   }
 });
 

@@ -3,8 +3,12 @@ const fs = require('fs');
 const regression = require('regression');
 const moment = require('moment');
 
+function getCityFilename(city) {
+  return `${__dirname}/${city.toLowerCase().trim().replace(/\s/g, '')}.csv`;
+}
+
 async function parseFile(city='Pouso Alegre') {
-  const fileName = `${__dirname}/${city.toLowerCase().trim().replace(/\s/g, '')}.csv`;
+  const fileName = getCityFilename(city);
 
   let extractedData = [];
 
@@ -49,6 +53,30 @@ async function parseFile(city='Pouso Alegre') {
   };
 }
 
+function writeToFile(city, data) {
+  const fileName = getCityFilename(city);
+  fs.readFile(fileName, 'utf8', function (err, fileData) {
+    let formatted = '';
+
+    data.forEach((e) => {
+      if (!e) return;
+      
+      const regex = new RegExp(e.split(',')[0] + "\,[0-9]*\,[0-9]*", "g");
+
+      if (fileData.search(regex) >= 0) {
+        formatted = fileData.replace(regex, e);
+      } else {
+        formatted = fileData + '\n' + e;
+      }
+    });
+
+    fs.writeFile(fileName, formatted, 'utf8', function (err) {
+      if (err) return console.log(err);
+    });
+  });
+}
+
 module.exports = {
-  parseFile
+  parseFile,
+  writeToFile
 }
