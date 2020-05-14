@@ -1,6 +1,6 @@
 const neatCsv = require('neat-csv');
 const fs = require('fs');
-const regression = require('./regression');
+const regression = require('regression');
 const moment = require('moment');
 
 async function parseFile(city='Pouso Alegre') {
@@ -31,7 +31,13 @@ async function parseFile(city='Pouso Alegre') {
     values.push([i, e.totalCasos]);
   });
 
-  const [a, b, doublingTime] = regression.exponential(values);
+  const options = {
+    order: 2,
+    precision: 10,
+  }
+
+  const [a, b] = regression.exponential(values, options).equation;
+  const doublingTime = Math.log(2)/b;
 
   extractedData.forEach((e, i) => {
     e.estimativa = parseFloat((a * Math.exp((i) * b)).toFixed(2));

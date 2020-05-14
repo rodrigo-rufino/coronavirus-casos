@@ -22,6 +22,7 @@ app.post('/api/data', async (req, res) => {
     const cityData = await parseFile(req.body.city);
     res.json(cityData);
   } catch (error) {
+    console.log(error);
     res.status(404).send('City not found!');
   }
 });
