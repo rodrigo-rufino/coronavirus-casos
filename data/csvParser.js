@@ -55,8 +55,9 @@ async function parseFile(city='Pouso Alegre') {
 
 function writeToFile(city, data) {
   const fileName = getCityFilename(city);
+
   fs.readFile(fileName, 'utf8', function (err, fileData) {
-    let formatted = '';
+    let formatted = fileData;
 
     data.forEach((e) => {
       if (!e) return;
