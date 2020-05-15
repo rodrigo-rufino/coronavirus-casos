@@ -84,14 +84,14 @@ export default function ChartCard(props) {
       <Grid container spacing={3}>
           <Grid item xs={4}>
             <NumbersCard
-              value={(data.values && data.values[data.values.length - 1].totalCasos) || 0}
+              value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalCasos) || 0}
               title={'Casos'}
               color={"#d9a629"}
             />
           </Grid>
           <Grid item xs={4}>
             <NumbersCard
-              value={(data.values && data.values[data.values.length - 1].totalObitos) || 0}
+              value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalObitos) || 0}
               title={'Óbitos'}
               color={"#ba2020"}
             />
@@ -99,7 +99,7 @@ export default function ChartCard(props) {
           <Grid item xs={4}>
             <NumbersCard
               value={(estimative.length === 0) ?
-                ((data.values && data.values[data.values.length - 1].totalCasos) || 0) :
+                ((data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalCasos) || 0) :
                 Math.ceil(estimative[estimative.length -1].estimativa)}
               title={`Casos em ${futureDays} dia${(futureDays === 0 || futureDays === 1) ? '' : 's'}.`}
               color={"#273b8c"}
