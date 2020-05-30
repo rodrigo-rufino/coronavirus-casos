@@ -37,20 +37,11 @@ function App() {
       <AppBar />
       <Container maxWidth="md" className="App">
         <Grid container spacing={5}>
-          {/* <Grid item xs={4}>
-            <ChartCard title={'Casos em Pouso Alegre'}>
-            </ChartCard>
-          </Grid>
-          <Grid item xs={4}>
-            <ChartCard title={'Casos em Pouso Alegre'}>
-            </ChartCard>
-          </Grid>
-          <Grid item xs={4}>
-            <ChartCard title={'Casos em Pouso Alegre'}>
-            </ChartCard>
-          </Grid> */}
           <Grid item xs={12}>
             <ChartCard city={'Pouso Alegre'}/>
+          </Grid>
+          <Grid item xs={12}>
+            <ChartCard city={'Santa Rita do Sapucaí'}/>
           </Grid>
         </Grid>
       </Container>

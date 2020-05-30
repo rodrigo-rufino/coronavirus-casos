@@ -17,18 +17,15 @@ app.get('/api/hello', (req, res) => {
 });
 
 app.post('/api/data', async (req, res) => {
-  console.log(req.body.city);
   try {
     const cityData = await parseFile(req.body.city);
     res.json(cityData);
   } catch (error) {
-    console.log(error);
     res.status(404).send('City not found!');
   }
 });
 
 app.post('/api/insertData', (req, res) => {
-  console.log(req.body.data);
   if (!req.body.data || !req.body.city) {
     res.status(400).send({ error: 'Missing Parameters' });
   }

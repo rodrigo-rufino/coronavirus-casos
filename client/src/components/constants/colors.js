@@ -1,0 +1,9 @@
+const CASES_COLOR = "#d9a629";
+const DEATHS_COLOR = "#ba2020";
+const ESTIMATIVE_COLOR = "#273b8c";
+
+export {
+  CASES_COLOR,
+  DEATHS_COLOR,
+  ESTIMATIVE_COLOR
+}

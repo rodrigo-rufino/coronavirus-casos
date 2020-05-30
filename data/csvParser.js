@@ -4,6 +4,7 @@ const regression = require('regression');
 const moment = require('moment');
 
 function getCityFilename(city) {
+  city = city.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   return `${__dirname}/${city.toLowerCase().trim().replace(/\s/g, '')}.csv`;
 }
 
@@ -22,17 +23,23 @@ async function parseFile(city='Pouso Alegre') {
   let totalObitos = 0;
   let values = [];
 
+  let beforeFirstCase = true;
+
   extractedData.forEach((e, i) => {
-    e.novosCasos = parseInt(e.novosCasos);
-    e.novosObitos = parseInt(e.novosObitos);
+    if (parseInt(e.novosCasos) >= 1) beforeFirstCase = false;
 
-    totalCasos += e.novosCasos;
-    totalObitos += e.novosObitos;
-
-    e.totalCasos = totalCasos;
-    e.totalObitos = totalObitos;
-
-    values.push([i, e.totalCasos]);
+    if (!beforeFirstCase) {
+      e.novosCasos = parseInt(e.novosCasos);
+      e.novosObitos = parseInt(e.novosObitos);
+  
+      totalCasos += e.novosCasos;
+      totalObitos += e.novosObitos;
+  
+      e.totalCasos = totalCasos;
+      e.totalObitos = totalObitos;
+  
+      values.push([i, e.totalCasos]);
+    }
   });
 
   const options = {

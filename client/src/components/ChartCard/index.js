@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import NumbersCard from '../NumbersCard'
 import styled from 'styled-components';
+import { CASES_COLOR, DEATHS_COLOR, ESTIMATIVE_COLOR } from '../constants/colors'
 
 const StyledCard = styled(Card)`
   margin-top: 20px;
@@ -54,7 +55,6 @@ export default function ChartCard(props) {
         estimativa: parseFloat((a * Math.exp((totalDays + i) * b)).toFixed(2)),
       })
     }
-    console.log(values);
     setEstimative(values);
   }
 
@@ -86,14 +86,14 @@ export default function ChartCard(props) {
             <NumbersCard
               value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalCasos) || 0}
               title={'Casos'}
-              color={"#d9a629"}
+              color={CASES_COLOR}
             />
           </Grid>
           <Grid item xs={4}>
             <NumbersCard
               value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalObitos) || 0}
               title={'Óbitos'}
-              color={"#ba2020"}
+              color={DEATHS_COLOR}
             />
           </Grid>
           <Grid item xs={4}>
@@ -102,7 +102,7 @@ export default function ChartCard(props) {
                 ((data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalCasos) || 0) :
                 Math.ceil(estimative[estimative.length -1].estimativa)}
               title={`Casos em ${futureDays} dia${(futureDays === 0 || futureDays === 1) ? '' : 's'}.`}
-              color={"#273b8c"}
+              color={ESTIMATIVE_COLOR}
             />
           </Grid>
         </Grid>
