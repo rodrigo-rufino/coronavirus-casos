@@ -99,9 +99,11 @@ export default function ChartCard(props) {
           <Grid item xs={4}>
             <NumbersCard
               value={(estimative.length === 0) ?
-                ((data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalCasos) || 0) :
+                '-' :
                 Math.ceil(estimative[estimative.length -1].estimativa)}
-              title={`Casos em ${futureDays} dia${(futureDays === 0 || futureDays === 1) ? '' : 's'}.`}
+              title={(estimative.length === 0) ?
+                      'Estimativa' :
+                      `Casos em ${futureDays} dia${(futureDays === 0 || futureDays === 1) ? '' : 's'}.` }
               color={ESTIMATIVE_COLOR}
             />
           </Grid>
