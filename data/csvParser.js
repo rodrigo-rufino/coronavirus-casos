@@ -10,9 +10,7 @@ function getCityFilename(city) {
 
 async function parseFile(city='Pouso Alegre') {
   const fileName = getCityFilename(city);
-
   let extractedData = [];
-
   try {
     extractedData = await neatCsv(fs.readFileSync(fileName));
   } catch (error) {
@@ -50,13 +48,30 @@ async function parseFile(city='Pouso Alegre') {
   const [a, b] = regression.exponential(values, options).equation;
   const doublingTime = Math.log(2)/b;
 
+  let weeks = []
+  let weeklyDeaths = 0;
+  let weeklyCases = 0;
+  let week = 0;
+
   extractedData.forEach((e, i) => {
-    e.estimativa = parseFloat((a * Math.exp((i) * b)).toFixed(2));
+    let weekDay = moment(e.data.split('/').join('-'), 'DD/MM/YYYY').day();
+    weeklyCases += e.novosCasos;
+    weeklyDeaths += e.novosObitos;
+
+    if (weekDay === 1 || i === extractedData.length-1) {
+      weeks.push({week, weeklyDeaths, weeklyCases});
+      weeklyDeaths = 0;
+      weeklyCases = 0;
+      week++;
+    }
+
+    e.estimativa = parseFloat((a * Math.exp((i) * b)).toFixed(2)); 
   });
 
   return {
     values: extractedData,
-    function: { a, b, doublingTime }
+    function: { a, b, doublingTime },
+    weeks
   };
 }
 
