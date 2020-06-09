@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import SimpleLineChart from '../SimpleLineChart';
 import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import NumbersCard from '../NumbersCard'
+import BarChart from '../BarChart';
 import styled from 'styled-components';
 import { CASES_COLOR, DEATHS_COLOR, ESTIMATIVE_COLOR } from '../constants/colors'
 
@@ -112,12 +112,22 @@ export default function ChartCard(props) {
       className={classes.root}
       variant="outlined">
         <CardContent>
+          <Typography variant="h5" component="h2">
+            Casos e Óbitos por dia
+          </Typography>
           <SimpleLineChart
-            city={'Pouso Alegre'}
+            city={props.city}
             data={data}
             estimative={estimative}
             futureDays={futureDays}
             futureDaysHandler={futureDaysHandler}
+          />
+          <Typography variant="h5" component="h2">
+            Casos e Óbitos por semana
+          </Typography>
+          <BarChart
+            city={props.city}
+            data={data}
           />
         </CardContent>
       </StyledCard>
