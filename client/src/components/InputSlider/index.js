@@ -33,15 +33,14 @@ export default function InputSlider({ futureDaysHandler, futureDays }) {
           />
         </Grid>
       </Grid>
-      <Typography id="input-slider" variant="body1" gutterBottom>
-        <Box fontSize={12} m={1}>
-          { futureDays === 0 ?
-            'Hoje' : 
-            `Daqui a ${futureDays} dia${(futureDays === 0 || futureDays === 1) ? '' : 's'}.`
-          }
-          <p>(considerando crescimento exponencial)</p>
-        </Box>
-      </Typography>
+      <Box component="p" fontSize={12} m={1}>
+        { futureDays === 0 ?
+          'Hoje' : 
+          `Daqui a ${futureDays} dia${(futureDays === 0 || futureDays === 1) ? '' : 's'}.`
+        }
+        <br></br>
+        (considerando crescimento exponencial)
+      </Box>
     </div>
   );
 }
