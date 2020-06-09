@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InputSlider({ futureDaysHandler, futureDays }) {
+export default function InputSlider({ futureDaysHandler, futureDays, maxDays }) {
   const classes = useStyles();
 
   const handleSliderChange = (event, newValue) => {
@@ -26,7 +26,7 @@ export default function InputSlider({ futureDaysHandler, futureDays }) {
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
           <Slider
-            max={90}
+            max={maxDays}
             value={typeof futureDays === 'number' ? futureDays : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"

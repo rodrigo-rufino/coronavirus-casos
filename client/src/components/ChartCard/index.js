@@ -27,27 +27,28 @@ export default function ChartCard(props) {
   const [data, setData] = useState({});
   const [estimative, setEstimative] = useState([]);
   const [futureDays, setFutureDays] = useState(0);
+  const [maxDays, setMaxDays] = useState(90);
 
   useEffect(() => {
     if ( !data.values ) fetchData();
-    estimateDays(futureDays);
   }, []);
 
-  function estimateDays(days) {
+  function estimateDays(days, apiData) {
     if (days === 0) {
       setEstimative([]);
       return;
     }
 
-    if ( !days || !data || !data.values || !data.function ) return;
+    if ( !days || !apiData || !apiData.values || !apiData.function ) return;
     
+
     let values  = [];
 
-    const { a, b } = data.function;
+    const { a, b } = apiData.function;
 
-    const totalDays = data.values.length;
+    const totalDays = apiData.values.length;
 
-    const lastDate = moment(data.values[totalDays - 1].data.split('/').join('-'), 'DD/MM/YYYY');
+    const lastDate = moment(apiData.values[totalDays - 1].data.split('/').join('-'), 'DD/MM/YYYY');
 
     for (let i = 0; i < days; i++) {
       values.push({
@@ -60,7 +61,6 @@ export default function ChartCard(props) {
 
   function futureDaysHandler(futureDays) {
     setFutureDays(futureDays);
-    estimateDays(futureDays);
   }
 
   async function fetchData() {
@@ -74,6 +74,7 @@ export default function ChartCard(props) {
     });
     const apiData = await apiCall.json();
     setData(apiData);
+    estimateDays(maxDays, apiData);
   }
 
   return (
@@ -98,10 +99,10 @@ export default function ChartCard(props) {
           </Grid>
           <Grid item xs={4}>
             <NumbersCard
-              value={(estimative.length === 0) ?
+              value={(futureDays === 0) ?
                 '-' :
-                Math.ceil(estimative[estimative.length -1].estimativa)}
-              title={(estimative.length === 0) ?
+                Math.ceil(estimative[futureDays - 1].estimativa)}
+              title={(futureDays === 0) ?
                       'Estimativa' :
                       `Casos em ${futureDays} dia${(futureDays === 0 || futureDays === 1) ? '' : 's'}.` }
               color={ESTIMATIVE_COLOR}
@@ -118,9 +119,10 @@ export default function ChartCard(props) {
           <SimpleLineChart
             city={props.city}
             data={data}
-            estimative={estimative}
+            estimative={estimative.slice(0, futureDays)}
             futureDays={futureDays}
             futureDaysHandler={futureDaysHandler}
+            maxDays={maxDays}
           />
           <Typography variant="h5" component="h2">
             Casos e Óbitos por semana

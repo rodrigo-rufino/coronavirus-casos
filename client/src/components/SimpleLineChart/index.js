@@ -7,7 +7,7 @@ import { CASES_COLOR, DEATHS_COLOR, ESTIMATIVE_COLOR } from '../constants/colors
 
 import InputSlider from '../InputSlider';
 
-export default function SimpleLineChart({ data, estimative, futureDaysHandler, futureDays }) {
+export default function SimpleLineChart({ data, estimative, futureDaysHandler, futureDays, maxDays }) {
 
   return (
     <React.Fragment>
@@ -29,7 +29,7 @@ export default function SimpleLineChart({ data, estimative, futureDaysHandler, f
         </LineChart>
       </ResponsiveContainer>
       <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-        <InputSlider futureDays={futureDays}  futureDaysHandler={futureDaysHandler}/>
+        <InputSlider futureDays={futureDays}  futureDaysHandler={futureDaysHandler} maxDays={maxDays}/>
       </div>
     </React.Fragment>
 
