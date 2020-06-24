@@ -83,6 +83,11 @@ export default function ChartCard(props) {
       <Typography variant="h3" component="h2">
         {props.city}
       </Typography>
+      {(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].data) &&
+        <Typography variant="body2" component="h5">
+          {`Atualizado em ${data.values[data.values.length - 1].data}`}
+        </Typography>
+      }
       <Grid container spacing={3}>
           <Grid item xs>
             <NumbersCard
