@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import NumbersCard from '../NumbersCard'
 import BarChart from '../BarChart';
 import styled from 'styled-components';
-import { CASES_COLOR, DEATHS_COLOR, ESTIMATIVE_COLOR } from '../constants/colors'
+import { CASES_COLOR, DEATHS_COLOR, ESTIMATIVE_COLOR, RECOVERED_COLOR, SUSPECTED_COLOR } from '../constants/colors'
 
 const StyledCard = styled(Card)`
   margin-top: 20px;
@@ -75,6 +75,7 @@ export default function ChartCard(props) {
     const apiData = await apiCall.json();
     setData(apiData);
     estimateDays(maxDays, apiData);
+    console.log(apiData);
   }
 
   return (
@@ -83,21 +84,35 @@ export default function ChartCard(props) {
         {props.city}
       </Typography>
       <Grid container spacing={3}>
-          <Grid item xs={4}>
+          <Grid item xs>
+            <NumbersCard
+              value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalRecuperados) || 0}
+              title={'Recuperados'}
+              color={RECOVERED_COLOR}
+            />
+          </Grid>
+          <Grid item xs>
+            <NumbersCard
+              value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].novosSuspeitos) || 0}
+              title={'Suspeitos'}
+              color={SUSPECTED_COLOR}
+            />
+          </Grid>
+          <Grid item xs>
             <NumbersCard
               value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalCasos) || 0}
-              title={'Casos'}
+              title={'Confirmados'}
               color={CASES_COLOR}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs>
             <NumbersCard
               value={(data.values && data.values[data.values.length - 1] && data.values[data.values.length - 1].totalObitos) || 0}
               title={'Óbitos'}
               color={DEATHS_COLOR}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs>
             <NumbersCard
               value={(futureDays === 0) ?
                 '-' :

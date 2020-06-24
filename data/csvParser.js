@@ -19,6 +19,8 @@ async function parseFile(city='Pouso Alegre') {
 
   let totalCasos = 0;
   let totalObitos = 0;
+  let totalRecuperados = 0;
+  let totalSuspeitos = 0;
   let values = [];
 
   let beforeFirstCase = true;
@@ -29,12 +31,16 @@ async function parseFile(city='Pouso Alegre') {
     if (!beforeFirstCase) {
       e.novosCasos = parseInt(e.novosCasos);
       e.novosObitos = parseInt(e.novosObitos);
+      e.novosRecuperados = parseInt(e.novosRecuperados);
+      e.novosSuspeitos = parseInt(e.novosSuspeitos);
   
       totalCasos += e.novosCasos;
       totalObitos += e.novosObitos;
+      totalRecuperados += e.novosRecuperados;
   
       e.totalCasos = totalCasos;
       e.totalObitos = totalObitos;
+      e.totalRecuperados = totalRecuperados;
   
       values.push([i, e.totalCasos]);
     }
