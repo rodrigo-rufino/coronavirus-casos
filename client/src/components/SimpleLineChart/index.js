@@ -3,7 +3,7 @@ import {
   ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
-import { CASES_COLOR, DEATHS_COLOR, ESTIMATIVE_COLOR } from '../constants/colors'
+import { CASES_COLOR, DEATHS_COLOR, ESTIMATIVE_COLOR, RECOVERED_COLOR } from '../constants/colors'
 
 import InputSlider from '../InputSlider';
 
@@ -23,6 +23,7 @@ export default function SimpleLineChart({ data, estimative, futureDaysHandler, f
           <YAxis tick={{fontSize: 12}}/>
           <Tooltip />
           <Legend />
+          <Line name="Total de Recuperados" type="monotone" dataKey="totalRecuperados" stroke={RECOVERED_COLOR} strokeWidth={2} activeDot={{ r: 5 }} dot={false}/>
           <Line name="Total de Casos" type="monotone" dataKey="totalCasos" stroke={CASES_COLOR} strokeWidth={2} activeDot={{ r: 5 }} dot={false}/>
           <Bar name="Novos Casos por dia" type="monotone" dataKey="novosCasos" fill={CASES_COLOR} barSize={20} stackId="casesDeaths"/>
           <Line name="Total de Óbitos" type="monotone" dataKey="totalObitos" stroke={DEATHS_COLOR} strokeWidth={2} dot={false}/>
